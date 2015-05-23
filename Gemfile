@@ -9,6 +9,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'geocoder'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'decent_exposure'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug'
