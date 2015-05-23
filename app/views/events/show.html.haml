@@ -28,7 +28,7 @@
             %th Players
             %th Age
           %tr
-            %td= link_to game.name, board_game_path
+            %td= link_to game.name, board_game_path(game.id)
             %td= "#{game.min_players} - #{game.max_players}"
             %td= "> #{game.min_age}"
       .col-md-4
