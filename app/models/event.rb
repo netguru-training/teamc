@@ -10,6 +10,6 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :board_games
 
-  validates :room, presence: true
-  validates :name, uniqueness: true
+  validates :room, :owner, presence: true
+  validates :name, presence: true, uniqueness: true
 end
