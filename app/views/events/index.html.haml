@@ -30,4 +30,7 @@
       %td= event.room.address
       %td= event.datetime
       %td= event.room.room_number
-      %td= link_to 'Show', event, class: 'btn btn-default'
+      %td= link_to 'Show', event, class: 'btn btn-success'
+      %td= link_to 'Edit', edit_event_path(event), class: 'btn btn-info'
+
+= link_to "New Event", new_event_path, class: 'btn btn-primary'
