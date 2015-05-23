@@ -18,4 +18,20 @@
   %h3 Description
   %p= event.description
 
+- event.board_games.each do |game|
+  .container
+    .row
+      .col-md-8
+        %table.table
+          %tr
+            %th Name
+            %th Players
+            %th Age
+          %tr
+            %td= link_to game.name, board_game_path
+            %td= "#{game.min_players} - #{game.max_players}"
+            %td= "> #{game.min_age}"
+      .col-md-4
+        = game.img_small__url
+
 = link_to 'Back', events_path, class: 'btn btn-default'
