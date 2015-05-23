@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'geocoder'
 gem 'activeadmin', '~> 1.0.0.pre1'
+gem 'decent_exposure'
 
 group :development, :test do
   gem 'byebug'
