@@ -1,0 +1,21 @@
+%h1= event.name
+
+%table.table.table-margin
+  %tr
+    %th Name
+    %td= event.name
+  %tr
+    %th Address
+    %td= event.room.address
+  %tr
+    %th Event time
+    %td= event.datetime.strftime("%d-%m-%Y at %H:%M")
+  %tr
+    %th Room number
+    %td= event.room.room_number
+
+.jumbotron
+  %h3 Description
+  %p= event.description
+
+= link_to 'Back', events_path, class: 'btn btn-default'
