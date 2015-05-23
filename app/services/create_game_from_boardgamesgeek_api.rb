@@ -2,36 +2,42 @@ class CreateGameFromBoardgamesgeekApi
   require 'net/http'
   require 'open-uri'
 
+  attr_accessor :error
+
   def initialize(object_id)
     @object_id = object_id
   end
 
   def call
     url = "http://www.boardgamegeek.com/xmlapi/boardgame/#{@object_id}"
-    #resp = Net::HTTP.get_response(URI.parse(url))
-    #xml_doc  = Nokogiri::XML(resp)
-    doc = Nokogiri::XML(open(url))
+    dom = Nokogiri::XML(open(url))
 
-    node = doc.xpath("//boardgames/boardgame").first
+    unless dom.nil?
+      node = dom.xpath("//boardgames/boardgame").first
 
-    hash = node.element_children.each_with_object(Hash.new) do |e, h|
-      h[e.name.to_sym] = e.content
-    end
+      hash = Hash[*node.element_children.map { |e| [e.name, e.content] }.flatten].with_indifferent_access
 
-    game = BoardGame.new
-    game.name = hash[:name]
-    game.description = hash[:description]
-    game.min_players = hash[:minplayers]
-    game.max_players = hash[:maxplayers]
-    game.min_age = hash[:age]
-    game.img_small__url = hash[:thumbnail]
-    game.img_full_url = hash[:image]
-    game.object_id = @object_id
+      unless hash["error"]
+        game = BoardGame.new
+        game.name = hash[:name]
+        game.description = hash[:description]
+        game.min_players = hash[:minplayers]
+        game.max_players = hash[:maxplayers]
+        game.min_age = hash[:age]
+        game.img_small__url = hash[:thumbnail]
+        game.img_full_url = hash[:image]
+        game.object_id = @object_id
 
-    if game.save
-      return true
+        unless game.save
+          self.error = "Error during saving game"
+        end
+      else
+        self.error = "No game with this id."
+      end
     else
-      return false
+      self.error = "Error when connectin to API"
     end
+
+    return self
   end
 end
