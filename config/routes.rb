@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :events
-  resources :games
+  resources :board_games
 end
