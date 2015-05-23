@@ -1,6 +1,6 @@
 ActiveAdmin.register Event do
 
-permit_params :name, :description, :room_id, :datetime
+permit_params :name, :description, :room_id, :datetime, board_games_ids: [:id]
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -21,6 +21,11 @@ permit_params :name, :description, :room_id, :datetime
       f.input :room, collection: (Room.all)
       f.input :datetime
     end
+
+    f.inputs "Games" do
+      f.input :board_games, :as => :select, :input_html => {:multiple => true}
+    end
+
     f.actions
   end
 
