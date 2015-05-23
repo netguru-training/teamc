@@ -28,4 +28,21 @@ permit_params :name, :description, :room_id, :datetime, board_game_ids: []
 
     f.actions
   end
+
+  show do
+    attributes_table do
+      row :name
+      row :description
+      row :room
+      row :datetime
+      row :board_game_list do
+        event.board_games.each do |game|
+          div do
+            simple_format game.name
+          end
+        end
+      end
+    end
+    active_admin_comments
+  end
 end
