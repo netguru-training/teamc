@@ -9,4 +9,7 @@ class Event < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
 
   accepts_nested_attributes_for :board_games
+
+  validates :room, presence: true
+  validates :name, uniqueness: true
 end
