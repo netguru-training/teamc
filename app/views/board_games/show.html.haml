@@ -1,0 +1,19 @@
+.container
+  .row
+    .col-md-6
+      %h2= board_game.name
+      %table.table
+        %tr
+          %th Players
+          %td= "#{board_game.min_players} - #{board_game.max_players}"
+        %tr
+          %th Age
+          %td= " > #{board_game.min_age}"
+        %tr
+          %th Description
+          %td
+    .col-md-6
+      = board_game.img_small__url
+  .row
+    .col-md-12
+      = board_game.description
