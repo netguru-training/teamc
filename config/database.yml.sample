@@ -1,0 +1,29 @@
+
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: teamc_development
+  pool:     5
+  username: teamc
+  password:
+  template: template0
+test:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: teamc_test
+  pool:     5
+  username: teamc
+  password:
+  template: template0
+
+production:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: teamc_production
+  pool:     5
+  username: teamc
+  password:
+  template: template0
