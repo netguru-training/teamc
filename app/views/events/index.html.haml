@@ -1,9 +1,17 @@
 %h1 Events
 
-%p
-  Search nearest events:
-  = render 'form_find_near'
-  = link_to 'All events', events_path, class: 'btn btn-default'
+.container
+  .row
+    .col-md-12
+      %h2 Search nearest events:
+  .row
+    .col-md-8
+      = render 'form_find_near'
+    .col-md-4
+  .row
+    .col-md-12
+      = link_to 'All events', events_path, class: 'btn btn-default'
+
 %br
 %table.table.table-margin
   %tr
