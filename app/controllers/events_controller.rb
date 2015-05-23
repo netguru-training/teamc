@@ -1,13 +1,15 @@
 class EventsController < ApplicationController
+  before_filter :authenticate_user!, except: [:index]
+  before_action :owner!, only: [:edit, :update, :destroy]
   expose(:events) { find_events }
   expose(:event, attributes: :product_params)
 
   def create
-    self.event = Event.new(product_params)
+    event.owner_id = current_user.id
     if event.save
       redirect_to events_path, notice: 'Event was successfully created.'
     else
-      render action: 'new'
+      render action: 'new', notice: 'Something went wrong'
     end
   end
 
@@ -20,7 +22,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    if self.event.save
+    if event.save
       redirect_to events_path
     else
       render action: 'edit'
@@ -39,6 +41,12 @@ class EventsController < ApplicationController
   private
 
     def product_params
-      params.require(:event).permit(:name, :description, :room_id, :datetime, :board_game_ids)
+      params.require(:event).permit(:name, :description, :room_id, :datetime, board_game_ids: [])
+    end
+
+    def owner!
+      unless event.owner_id == current_user.id
+        redirect_to events_path, flash: {error: "You are not allowed to edit this event."}
+      end
     end
 end
