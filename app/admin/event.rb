@@ -18,7 +18,7 @@ permit_params :name, :description, :room_id, :datetime
     f.inputs "Event" do
       f.input :name
       f.input :description
-      f.input :room_id, collection: (Room.all)
+      f.input :room, collection: (Room.all)
       f.input :datetime
     end
     f.actions
