@@ -1,0 +1,20 @@
+%h1 Events
+
+%table.table
+  %tr
+    %th Name
+    %th Place
+    %th Date
+    %th Room
+    %th
+    %th
+    %th
+  %tr
+
+  - events.each do |event|
+    %tr
+      %td= event.name
+      %td= "#{room.city}, #{room.street}"
+      %td= event.datetime
+      %td= room.room_number
+      %td= link_to 'Show', admin_event_path, class: 'btn btn-default'
