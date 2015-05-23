@@ -1,6 +1,6 @@
 ActiveAdmin.register Event do
 
-permit_params :name, :description, :place, :datetime
+permit_params :name, :description, :room_id, :datetime
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
