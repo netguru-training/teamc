@@ -14,5 +14,15 @@ permit_params :name, :description, :room_id, :datetime
   #   permitted
   # end
 
+  form do |f|
+    f.inputs "Event" do
+      f.input :name
+      f.input :description
+      f.input :room_id, collection: (Room.all)
+      f.input :datetime
+    end
+    f.actions
+  end
+
 
 end
