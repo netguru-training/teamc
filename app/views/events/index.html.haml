@@ -15,6 +15,7 @@
 %br
 %table.table.table-margin
   %tr
+    %th Games
     %th Name
     %th Place
     %th Date
@@ -26,6 +27,10 @@
 
   - events.each do |event|
     %tr
+      %td
+        .badge
+          .glyphicon.glyphicon-heart
+          = event.board_games.count
       %td= event.name
       %td= event.room.address
       %td= event.datetime
