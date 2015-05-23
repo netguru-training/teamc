@@ -257,6 +257,7 @@ DEPENDENCIES
   html2haml
   jbuilder (~> 2.0)
   jquery-rails
+  nokogiri (~> 1.6.6.2)
   pg
   pry-rails
   pry-rescue

@@ -10,7 +10,7 @@ gem 'geocoder'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'decent_exposure'
 gem 'simple_form'
-
+gem 'nokogiri', '~> 1.6.6.2'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
