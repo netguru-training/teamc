@@ -23,11 +23,9 @@ permit_params :name, :description, :room_id, :datetime, board_game_ids: []
     end
 
     f.inputs "Games" do
-      f.input :board_game_ids, :as => :select, :input_html => {:multiple => true}, collection: (BoardGame.all)
+      f.input :board_game_ids, as: :select, input_html: { multiple: true }, collection: ( BoardGame.all )
     end
 
     f.actions
   end
-
-
 end
