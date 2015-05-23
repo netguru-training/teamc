@@ -14,7 +14,7 @@
   - events.each do |event|
     %tr
       %td= event.name
-      %td= "#{room.city}, #{room.street}"
+      %td= event.room.address
       %td= event.datetime
-      %td= room.room_number
-      %td= link_to 'Show', event_path, class: 'btn btn-default'
+      %td= event.room.room_number
+      %td= link_to 'Show', event, class: 'btn btn-default'
