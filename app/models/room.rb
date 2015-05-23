@@ -9,4 +9,8 @@ class Room < ActiveRecord::Base
   def address
     "#{city}, #{street}"
   end
+
+  def to_s
+    address + " Room no. #{room_number}"
+  end
 end
