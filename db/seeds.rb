@@ -4,18 +4,19 @@ require 'ffaker'
 # See http://railsapps.github.io/rails-environment-variables.html
 
 
-4.times do |i|
-  r = Room.create( city: "New York", street: "Smith Street", room_number: i )
-  u = User.create( name: "Peter Parker", email: "spiderman" + i.to_s + "@example.com",
-    password: "password", password_confirmation: "password", age: i+15 )
-  Event.create(
-    name: "Event " + i.to_s,
-    description: "Some very convincing description here!",
-    datetime: i.minutes.from_now,
-    room_id: r.id,
-    owner_id: u.id
-    )
-end
+
+r = Room.create( city: "New York", street: "Smith Street", room_number: 1 )
+u = User.create( name: "Peter Parker", email: "spiderman@example.com",
+  password: "password", password_confirmation: "password", age: 15 )
+Event.create(
+  name: "Event sample",
+  description: "Some very convincing description here!",
+  datetime: 1.day.from_now,
+  room_id: r.id,
+  owner_id: u.id,
+  token: SecureRandom.uuid
+  )
+
 
 10.times do |i|
   r = Room.create( city: FFaker::Address.city, street: FFaker::Address.street_address, room_number: i )
@@ -27,7 +28,8 @@ end
     description: "Some very convincing description here!",
     datetime: i.days.from_now,
     room_id: r.id,
-    owner_id: u.id
+    owner_id: u.id,
+    token: SecureRandom.uuid
     )
 end
 
