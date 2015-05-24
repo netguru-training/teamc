@@ -17,8 +17,8 @@ permit_params :name, :description, :min_players, :max_players, :min_age, :game_i
 
   controller do
     def create
-      object_id = params[:board_game][:object_id]
-      ret = CreateGameFromBoardgamesgeekApi.new(object_id).call
+      game_id = params[:board_game][:game_id]
+      ret = CreateGameFromBoardgamesgeekApi.new(game_id).call
       if ret.error.present?
         flash[:error] = ret.error.to_s
         redirect_to admin_board_games_url
@@ -31,7 +31,7 @@ permit_params :name, :description, :min_players, :max_players, :min_age, :game_i
 
   form do |f|
     f.inputs "Game_id" do
-      f.input :object_id
+      f.input :game_id
     end
 
     f.actions

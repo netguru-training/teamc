@@ -14,6 +14,8 @@ permit_params :name, :description, :room_id, :datetime, board_game_ids: []
   #   permitted
   # end
 
+
+
   form do |f|
     f.inputs "Event" do
       f.input :name
