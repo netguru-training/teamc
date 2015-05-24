@@ -32,21 +32,15 @@ class EventsController < ApplicationController
   end
 
   def find_events
-    if user_signed_in?
-      if searched?
-        rooms = Room.near(params[:search][:find_near], 20, units: :km)
-        Event.only_public(current_user).where(room_id: rooms.map(&:id))
-      else
-        Event.only_public(current_user)
-      end
-    else
-      if searched?
-        rooms = Room.near(params[:search][:find_near], 20, units: :km)
-        Event.guest.where(room_id: rooms.map(&:id))
-      else
-        params[:token].present? ? Event.all : Event.guest
-      end
+    scope = user_signed_in? ? Event.only_public(current_user) : Event.guest
+    scope = Event.all if !user_signed_in? && params[:token]
+
+    if searched?
+      rooms = Room.near(params[:search][:find_near], 20, units: :km)
+      return scope.where(room_id: rooms.map(&:id))
     end
+
+    scope
   end
 
   def invite
