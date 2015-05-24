@@ -1,10 +1,10 @@
 class EventInviter < ApplicationMailer
   default from: 'invite@boardgamesevents.com'
 
-  def event_invite(owner, event, user)
+  def event_invite(owner, event, email)
     @owner = owner
     @event = event
-    @user = user
-    mail (to: @user.email, subject: "#{@owner.name} has invited You to event #{@event.name}!")
+    @email = email
+    mail (to: email, subject: "#{@owner.name} has invited You to event #{@event.name}!")
   end
 end
