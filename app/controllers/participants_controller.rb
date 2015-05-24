@@ -7,6 +7,7 @@ class ParticipantsController < ApplicationController
     event.users << current_user
     event.save
     flash[:success] = "Joined #{event.name} event"
+    event_notifier(current_user)
     redirect_to event_url(event.id)
   end
 
@@ -19,7 +20,7 @@ class ParticipantsController < ApplicationController
 
   private
 
-    def event_notifier
-      UserMailer.delay(run_at: event.datetime - 5.minutes).send_email(user)
+    def event_notifier(user)
+      UserMailer.delay.event_notification(user, event)
     end
 end
