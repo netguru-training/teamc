@@ -4,12 +4,12 @@ class CreateGameFromBoardgamesgeekApi
 
   attr_accessor :error
 
-  def initialize(object_id)
-    @object_id = object_id
+  def initialize(game_id)
+    @game_id = game_id
   end
 
   def call
-    url = "http://www.boardgamegeek.com/xmlapi/boardgame/#{@object_id}"
+    url = "http://www.boardgamegeek.com/xmlapi/boardgame/#{@game_id}"
     dom = Nokogiri::XML(open(url))
 
     unless dom.nil?
@@ -26,7 +26,7 @@ class CreateGameFromBoardgamesgeekApi
         game.min_age = hash[:age]
         game.img_small__url = hash[:thumbnail]
         game.img_full_url = hash[:image]
-        game.object_id = @object_id
+        game.game_id = @game_id
 
         unless game.save
           self.error = "Error during saving game"
