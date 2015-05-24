@@ -1,8 +1,11 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!, except: [:index]
+  before_filter :set_current_user
   before_action :owner!, only: [:edit, :update, :destroy]
   expose(:events) { find_events }
   expose(:event, attributes: :product_params)
+
+
 
   def create
     event.owner_id = current_user.id
@@ -30,18 +33,31 @@ class EventsController < ApplicationController
   end
 
   def find_events
-    if params[:search].present?
-      rooms = Room.near(params[:search][:find_near], 20, units: :km)
-      Event.where(room_id: rooms.map(&:id))
+    if current_user != nil
+      if params[:search].present?
+        rooms = Room.near(params[:search][:find_near], 20, units: :km)
+        Event.only_public.where(room_id: rooms.map(&:id))
+      else
+        Event.only_public
+      end
     else
-      Event.all
+      if params[:search].present?
+        rooms = Room.near(params[:search][:find_near], 20, units: :km)
+        Event.guest.where(room_id: rooms.map(&:id))
+      else
+        Event.guest
+      end
     end
+  end
+
+  def set_current_user
+  Event.current_user = current_user
   end
 
   private
 
     def product_params
-      params.require(:event).permit(:name, :description, :room_id, :datetime, board_game_ids: [])
+      params.require(:event).permit(:name, :description, :room_id, :datetime, :private, board_game_ids: [])
     end
 
     def owner!
