@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  before_create :create_token, unless: :token?
 
   has_many :event_games
   has_many :board_games, :through => :event_games
@@ -19,8 +20,12 @@ class Event < ActiveRecord::Base
   validates :room, :owner, presence: true
   validates :name, presence: true, uniqueness: true
 
-    def owner?(user)
-      owner_id == user.id
-    end
+  def owner?(user)
+    owner_id == user.id
+  end
+
+  def create_token
+    self.token = SecureRandom.uuid
+  end
 
 end

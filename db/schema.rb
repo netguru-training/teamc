@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524083550) do
+ActiveRecord::Schema.define(version: 20150524094410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20150524083550) do
     t.integer  "room_id"
     t.integer  "owner_id"
     t.boolean  "private",     default: false
+    t.string   "token"
   end
 
   create_table "participants", force: :cascade do |t|
