@@ -21,6 +21,6 @@ class ParticipantsController < ApplicationController
   private
 
     def event_notifier(user)
-      UserMailer.delay.event_notification(user, event)
+      UserMailer.delay(run_at: event.datetime - 2.hours).event_notification(user, event)
     end
 end
