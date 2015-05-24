@@ -5,7 +5,7 @@
       = f.input :private
       = f.input :description
       = f.input :room_id  , collection: ( Room.all)
-      = f.input :datetime
+      = f.input :datetime, as: :string, input_html: {class: "datetimepicker"}
       = f.input :board_game_ids, as: :select, input_html: { multiple: true }, collection: ( BoardGame.all)
       = f.input :user_ids, as: :select, input_html: { multiple: true }, collection: ( event.users.all )
 

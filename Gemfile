@@ -13,6 +13,8 @@ gem 'simple_form'
 gem 'nokogiri', '~> 1.6.6.2'
 gem 'ffaker'
 gem 'delayed_job_active_record'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
