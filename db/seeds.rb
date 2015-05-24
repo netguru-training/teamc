@@ -12,7 +12,7 @@ puts 'CREATED ADMIN USER: ' << user.email
 
 4.times do |i|
   r = Room.create( city: "New York biatch!", street: "Smith Street", room_number: i )
-  u = User.create( email: "spiderman" + i.to_s + "@example.com", password: "password", password_confirmation: "password" )
+  u = User.create( name: "Peter Parker", email: "spiderman" + i.to_s + "@example.com", password: "password", password_confirmation: "password" )
   Event.create(
     name: "Event " + i.to_s,
     description: "Some very convincing description here!",
