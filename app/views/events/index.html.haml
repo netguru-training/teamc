@@ -15,31 +15,39 @@
 %br
 %table.table.table-margin
   %tr
+    %th Me?
     %th Games
+    %th Participants
     %th Name
     %th Place
     %th Date
     %th Room
-    %th
-    %th
-    %th
+    %th.text-center Actions
   %tr
 
   - events.each do |event|
     %tr
       %td
+        - if event.users.include? current_user
+          %span.glyphicon.glyphicon-ok
+      %td
         .badge
           .glyphicon.glyphicon-heart
           = event.board_games.count
+      %td
+        .badge
+          .glyphicon.glyphicon-user
+          = event.users.count
       %td= event.name
       %td= event.room.address
       %td= event.datetime
       %td= event.room.room_number
-      - if current_user
-        %td= link_to 'Show', event, class: 'btn btn-success'
-        -if event.owner?(current_user)
-          %td= link_to 'Edit', edit_event_path(event), class: 'btn btn-info'
-          %td= link_to 'Destroy', event, method: :delete, class: 'btn btn-danger'
+      %td
+        - if current_user
+          = link_to 'Show', event, class: 'btn btn-success btn-xs'
+          -if event.owner?(current_user)
+            = link_to 'Edit', edit_event_path(event), class: 'btn btn-info btn-xs'
+            = link_to 'Destroy', event, method: :delete, class: 'btn btn-danger btn-xs'
 
 - if current_user
   = link_to "New Event", new_event_path, class: 'btn btn-primary'
