@@ -65,6 +65,8 @@
         %h3 Invite user to your event!
         = render 'form_invite'
       .col-md-8
-    = link_to 'Edit', edit_event_path(event), class: 'btn btn-info'
-= link_to 'Back', events_path, class: 'btn btn-default'
+    .btn-group
+      = link_to 'Edit', edit_event_path(event), class: 'btn btn-primary'
+.btn-group
+  = link_to 'Back', events_path, class: 'btn btn-info'
 
