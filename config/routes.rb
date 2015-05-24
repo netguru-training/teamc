@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :participants, only: [:create, :destroy]
+    member do
+      post :invite
+    end
   end
 
   resources :board_games
