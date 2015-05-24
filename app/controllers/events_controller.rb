@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_filter :authenticate_user!, except: [:index]
+  before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :authenticate_show, only: :show
   before_action :owner!, only: [:edit, :update, :destroy]
   expose(:events) { find_events }
   expose(:event, attributes: :product_params)
@@ -49,6 +50,10 @@ class EventsController < ApplicationController
     end
   end
 
+  def invite
+
+  end
+
   private
 
     def product_params
@@ -57,7 +62,15 @@ class EventsController < ApplicationController
 
     def owner!
       unless event.owner_id == current_user.id
-        redirect_to events_path, flash: {error: "You are not allowed to edit this event."}
+        redirect_to events_path, {error: "You are not allowed to edit this event."}
+      end
+    end
+
+    def authenticate_show
+      if params[:token].present?
+        authenticate_user! unless event.token == params[:token]
+      else
+        authenticate_user!
       end
     end
 end
