@@ -1,0 +1,8 @@
+= simple_form_for :event, url: invite_event_url(event.id) do |f|
+  = f.error_notification
+
+  .form-inputs
+  = f.input :event_inviter, label: 'E-mail'
+
+  .form-actions
+    = f.button :submit, 'Invite!', class: 'btn btn-default'

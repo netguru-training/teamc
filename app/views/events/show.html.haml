@@ -40,6 +40,18 @@
       .col-md-4
         = image_tag game.img_small__url, class: "small-img"
 
+<<<<<<< HEAD
+
+=======
+%br
+- if current_user.id == event.owner_id
+  .container
+    .row
+      .col-md-4
+        %h3 Invite user to your event!
+        = render 'form_invite'
+      .col-md-8
+%br
 %h3
   Participants
   ="(#{event.users.count})"
@@ -64,3 +76,4 @@
   - if event.owner == current_user
     = link_to 'Edit', edit_event_path(event), class: 'btn btn-info'
 = link_to 'Back', events_path, class: 'btn btn-default'
+
