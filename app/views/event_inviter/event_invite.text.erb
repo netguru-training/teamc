@@ -1,0 +1,8 @@
+Hey <%= @user.name %>,
+
+You have been invited to <%= @event.name %> starts on <%= @event.datetime %>.
+It will take place at <%= @event.room.address %>.
+
+Please visit site <%= event_url(event.id) %>to join in.
+
+Have fun!
