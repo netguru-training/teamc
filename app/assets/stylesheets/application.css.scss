@@ -12,8 +12,10 @@
  *
  *= require_self
  *= require framework_and_overrides
+ *= require events
  */
 
 .image_margin {
   margin-top: 7em;
 }
+

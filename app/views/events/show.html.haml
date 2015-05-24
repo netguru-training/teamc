@@ -38,7 +38,7 @@
             %td= "#{game.min_players} - #{game.max_players}"
             %td= "> #{game.min_age}"
       .col-md-4
-        = game.img_small__url
+        = image_tag game.img_small__url, class: "small-img"
 
 %h3 Participants
 - event.users.each do |user|
