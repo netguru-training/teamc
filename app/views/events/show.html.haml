@@ -13,6 +13,12 @@
   %tr
     %th Room number
     %td= event.room.room_number
+  %tr
+    %th Games count
+    %td= event.board_games.count
+  %tr
+    %th Participants count
+    %td= event.users.count
 
 .jumbotron
   %h3 Description
@@ -34,4 +40,20 @@
       .col-md-4
         = game.img_small__url
 
+%h3 Participants
+- event.users.each do |user|
+  .container
+    .row
+      .col-md-2
+      .col-md-8
+        %table.table
+          %tr
+            %th Name
+            %th Age
+          %tr
+            %td= "#{user.name}"
+            %td= "#{user.age}"
+
+- if user_signed_in?
+  = link_to 'Join this event!', event_participants_path(event.id), method: 'post', class: 'btn btn-success'
 = link_to 'Back', events_path, class: 'btn btn-default'
