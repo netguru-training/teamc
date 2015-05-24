@@ -12,4 +12,8 @@ class Event < ActiveRecord::Base
 
   validates :room, :owner, presence: true
   validates :name, presence: true, uniqueness: true
+
+    def owner?(user)
+      owner_id == user.id
+    end
 end
