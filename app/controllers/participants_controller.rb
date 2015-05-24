@@ -16,4 +16,10 @@ class ParticipantsController < ApplicationController
     flash[:info] = "Unjoined #{event.name} event"
     redirect_to event_url(event.id)
   end
+
+  private
+
+    def event_notifier
+      UserMailer.delay(run_at: event.datetime - 5.minutes).send_email(user)
+    end
 end

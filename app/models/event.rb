@@ -22,4 +22,8 @@ class Event < ActiveRecord::Base
     def owner?(user)
       owner_id == user.id
     end
+
+    def send_email(user)
+      UserMailer.event_notification(user, event).deliver!
+    end
 end

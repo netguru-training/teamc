@@ -4,6 +4,6 @@ class UserMailer < ApplicationMailer
   def event_notification(user, event)
     @user = user
     @event = event
-    mail (to: @user.email, subject: "#{@event.name} is coming!")
+    mail(to: @user.email, subject: "#{@event.name} is coming!")
   end
 end
