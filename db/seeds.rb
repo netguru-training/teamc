@@ -15,7 +15,8 @@ puts 'CREATED ADMIN USER: ' << user.email
 
 4.times do |i|
   r = Room.create( city: "New York", street: "Smith Street", room_number: i )
-  u = User.create( name: "Peter Parker", email: "spiderman" + i.to_s + "@example.com", password: "password", password_confirmation: "password" )
+  u = User.create( name: "Peter Parker", email: "spiderman" + i.to_s + "@example.com",
+    password: "password", password_confirmation: "password", age: i+15 )
   Event.create(
     name: "Event " + i.to_s,
     description: "Some very convincing description here!",
@@ -28,7 +29,8 @@ end
 10.times do |i|
   r = Room.create( city: FFaker::Address.city, street: FFaker::Address.street_address, room_number: i )
   name = FFaker::Name.name
-  u = User.create( name: name, email: name.gsub(' ', '.') + "@example.com", password: "password", password_confirmation: "password" )
+  u = User.create( name: name, email: name.gsub(' ', '.') + "@example.com",
+    password: "password", password_confirmation: "password", age: i+15 )
   Event.create(
     name: "Event " + (i+10).to_s,
     description: "Some very convincing description here!",
