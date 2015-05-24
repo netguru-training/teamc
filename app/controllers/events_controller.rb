@@ -51,8 +51,8 @@ class EventsController < ApplicationController
   end
 
   def invite
-    if params[:email].present?
-      EventInviterMailer.event_invite(event.owner_id, event, params[:email]).deliver!
+    if params[:event][:event_inviter].present?
+      EventInviterMailer.event_invite(event.owner, event, params[:event][:event_inviter]).deliver!
     end
     redirect_to event_path
   end
