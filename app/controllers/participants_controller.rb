@@ -4,10 +4,14 @@ class ParticipantsController < ApplicationController
   expose(:event)
 
   def create
-    event.users << current_user
-    event.save
-    flash[:success] = "Joined #{event.name} event"
-    event_notifier(current_user)
+    unless event.users.include? current_user
+      event.users << current_user
+      event.save
+      flash[:success] = "Joined #{event.name} event"
+      event_notifier(current_user)
+    else
+      flash[:danger] = "You are already signed in"
+    end
     redirect_to event_url(event.id)
   end
 
