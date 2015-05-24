@@ -31,8 +31,10 @@ end
     )
 end
 
-10.times do |i|
-  BoardGame.create( name: "Game " + i.to_s, description: "Game description here!", min_players: 1, max_players: i+2, min_age: i+3,
-    img_small__url: "http://media.idownloadblog.com/wp-content/uploads/2013/07/Board-Games-500x373.jpg", img_full_url: "http://media.idownloadblog.com/wp-content/uploads/2013/07/Board-Games-500x373.jpg",
-    game_id: (i+2)*5 )
+BoardGame.create( name: "Game example", description: "Game description here!", min_players: 1, max_players: 6, min_age: 8,
+  img_small__url: "http://media.idownloadblog.com/wp-content/uploads/2013/07/Board-Games-500x373.jpg", img_full_url: "http://media.idownloadblog.com/wp-content/uploads/2013/07/Board-Games-500x373.jpg",
+  game_id: 1 )
+
+15.times do |id|
+  CreateGameFromBoardgamesgeekApi.new(35420+id).call
 end
