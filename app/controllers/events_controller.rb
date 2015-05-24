@@ -2,9 +2,8 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   before_filter :authenticate_show, only: :show
   before_action :owner!, only: [:edit, :update, :destroy]
-  expose(:events) { find_events }
+  expose_decorated(:events) { find_events }
   expose_decorated(:event, attributes: :product_params, decorator: EventDecorator)
-
 
 
   def create

@@ -6,6 +6,6 @@ class Room < ActiveRecord::Base
   validates :city, :street, presence: true
 
   def to_s
-    address + " Room no. #{room_number}"
+    self.decorate.address + " Room no. #{room_number}"
   end
 end
