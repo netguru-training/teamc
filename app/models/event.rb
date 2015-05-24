@@ -1,5 +1,4 @@
 class Event < ActiveRecord::Base
-  cattr_accessor :current_user
 
   has_many :event_games
   has_many :board_games, :through => :event_games
@@ -12,7 +11,7 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :board_games
 
-  scope :only_public,->{ where("private = 'f' OR (owner_id = ? AND private = 't')", current_user) }
+  scope :only_public,->(current_user) { where("private = 'f' OR (owner_id = ? AND private = 't')", current_user.id) }
 
   scope :guest, -> { where("private = 'f'") }
 

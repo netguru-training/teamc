@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!, except: [:index]
-  before_filter :set_current_user
   before_action :owner!, only: [:edit, :update, :destroy]
   expose(:events) { find_events }
   expose(:event, attributes: :product_params)
@@ -33,12 +32,12 @@ class EventsController < ApplicationController
   end
 
   def find_events
-    if current_user != nil
+    if user_signed_in?
       if params[:search].present?
         rooms = Room.near(params[:search][:find_near], 20, units: :km)
-        Event.only_public.where(room_id: rooms.map(&:id))
+        Event.only_public(current_user).where(room_id: rooms.map(&:id))
       else
-        Event.only_public
+        Event.only_public(current_user)
       end
     else
       if params[:search].present?
@@ -48,10 +47,6 @@ class EventsController < ApplicationController
         Event.guest
       end
     end
-  end
-
-  def set_current_user
-  Event.current_user = current_user
   end
 
   private
