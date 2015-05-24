@@ -22,7 +22,9 @@
 
 %h3
   Games
-  ="(#{event.board_games.count})"
+  .badge
+    .glyphicon.glyphicon-knight
+    = event.board_games.count
 %table.table
   %tr
     %th Name
@@ -38,7 +40,9 @@
 
 %h3
   Participants
-  ="(#{event.users.count})"
+  .badge
+    .glyphicon.glyphicon-user
+    = event.users.count
 - event.users.each do |user|
   %table.table
     %tr
