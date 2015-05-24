@@ -23,6 +23,9 @@ gem 'devise'
 gem 'figaro', '>= 1.0.0.rc1'
 gem 'haml-rails'
 gem 'pg'
+gem 'draper', '~> 1.3'
+gem 'decent_decoration'
+
 group :development do
   gem 'better_errors'
   gem 'html2haml'
