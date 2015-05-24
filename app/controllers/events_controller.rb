@@ -25,7 +25,7 @@ class EventsController < ApplicationController
 
   def update
     if event.save
-      redirect_to events_path
+      redirect_to event_path(event)
     else
       render action: 'edit'
     end
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
   private
 
     def product_params
-      params.require(:event).permit(:name, :description, :room_id, :datetime, :private, board_game_ids: [])
+      params.require(:event).permit(:name, :description, :room_id, :datetime, :private, board_game_ids: [], user_ids: [])
     end
 
     def owner!

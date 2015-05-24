@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
 
   accepts_nested_attributes_for :board_games
+  accepts_nested_attributes_for :users
 
   scope :only_public,->(current_user) { where("private = 'f' OR (owner_id = ? AND private = 't')", current_user.id) }
 

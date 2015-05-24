@@ -7,6 +7,7 @@
       = f.input :room_id  , collection: ( Room.all)
       = f.input :datetime
       = f.input :board_game_ids, as: :select, input_html: { multiple: true }, collection: ( BoardGame.all)
+      = f.input :user_ids, as: :select, input_html: { multiple: true }, collection: ( event.users.all )
 
     .form-actions
       = f.submit 'Save', class: 'btn btn-success'

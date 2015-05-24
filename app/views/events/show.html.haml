@@ -6,13 +6,10 @@
     %td= event.name
   %tr
     %th Address
-    %td= event.room.address
+    %td= event.room.address + ", " + event.room.to_s
   %tr
     %th Event time
     %td= event.datetime.strftime("%d-%m-%Y at %H:%M")
-  %tr
-    %th Room number
-    %td= event.room.room_number
   %tr
     %th Games count
     %td= event.board_games.count
@@ -24,6 +21,9 @@
   %h3 Description
   %p= event.description
 
+%h3
+  Games
+  ="(#{event.board_games.count})"
 - event.board_games.each do |game|
   .container
     .row
@@ -40,11 +40,12 @@
       .col-md-4
         = image_tag game.img_small__url, class: "small-img"
 
-%h3 Participants
+%h3
+  Participants
+  ="(#{event.users.count})"
 - event.users.each do |user|
   .container
     .row
-      .col-md-2
       .col-md-8
         %table.table
           %tr
@@ -59,4 +60,7 @@
     = link_to 'Unjoin event', event_participant_path(event.id, current_user.id), method: 'delete', class: 'btn btn-danger', data: { confirmation: "Are you sure?" }
   - else
     = link_to 'Join this event!', event_participants_path(event.id), method: 'post', class: 'btn btn-success'
+  <br />
+  - if event.owner == current_user
+    = link_to 'Edit', edit_event_path(event), class: 'btn btn-info'
 = link_to 'Back', events_path, class: 'btn btn-default'
