@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :owner!, only: [:edit, :update, :destroy]
   expose_decorated(:events) { find_events }
   expose_decorated(:event, attributes: :product_params, decorator: EventDecorator)
-
+  expose(:searched?) { params[:search].present? }
 
   def create
     event.owner_id = current_user.id
@@ -33,14 +33,14 @@ class EventsController < ApplicationController
 
   def find_events
     if user_signed_in?
-      if params[:search].present?
+      if searched?
         rooms = Room.near(params[:search][:find_near], 20, units: :km)
         Event.only_public(current_user).where(room_id: rooms.map(&:id))
       else
         Event.only_public(current_user)
       end
     else
-      if params[:search].present?
+      if searched?
         rooms = Room.near(params[:search][:find_near], 20, units: :km)
         Event.guest.where(room_id: rooms.map(&:id))
       else

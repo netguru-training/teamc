@@ -10,19 +10,22 @@
     .col-md-4
   .row
     .col-md-12
-      = link_to 'All events', events_path, class: 'btn btn-default'
+      - if searched?
+        = link_to 'All events', events_path, class: 'btn btn-default'
 
 %br
 %table.table.table-margin
   %tr
-    %th Me?
+    %th
+      - if user_signed_in?
+        Me?
     %th Games
     %th Participants
     %th Name
     %th Place
     %th Date
     %th Room
-    %th.text-center Actions
+    %th
   %tr
 
   - events.each do |event|
