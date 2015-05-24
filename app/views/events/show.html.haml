@@ -17,32 +17,25 @@
     %th Participants count
     %td= event.users.count
 
-.jumbotron
-  %h3 Description
-  %p= event.description
+%h3 Description
+%p= event.description
 
 %h3
   Games
   ="(#{event.board_games.count})"
-- event.board_games.each do |game|
-  .container
-    .row
-      .col-md-8
-        %table.table
-          %tr
-            %th Name
-            %th Players
-            %th Age
-          %tr
-            %td= link_to game.name, board_game_path(game.id)
-            %td= "#{game.min_players} - #{game.max_players}"
-            %td= "> #{game.min_age}"
-      .col-md-4
-        = image_tag game.img_small__url, class: "small-img"
+%table.table
+  %tr
+    %th Name
+    %th Players
+    %th Age
+    %th
+  - event.board_games.each do |game|
+    %tr
+      %td= link_to game.name, board_game_path(game.id)
+      %td= "#{game.min_players} - #{game.max_players}"
+      %td= "> #{game.min_age}"
+      %td= image_tag game.img_small__url, class: "small-img"
 
-<<<<<<< HEAD
-
-=======
 %br
 - if current_user.id == event.owner_id
   .container
@@ -56,16 +49,13 @@
   Participants
   ="(#{event.users.count})"
 - event.users.each do |user|
-  .container
-    .row
-      .col-md-8
-        %table.table
-          %tr
-            %th Name
-            %th Age
-          %tr
-            %td= "#{user.name}"
-            %td= "#{user.age}"
+  %table.table
+    %tr
+      %th Name
+      %th Age
+    %tr
+      %td= "#{user.name}"
+      %td= "#{user.age}"
 
 - if user_signed_in?
   - if event.users.include? current_user
