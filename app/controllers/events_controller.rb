@@ -45,7 +45,7 @@ class EventsController < ApplicationController
         rooms = Room.near(params[:search][:find_near], 20, units: :km)
         Event.guest.where(room_id: rooms.map(&:id))
       else
-        Event.guest
+        params[:token].present? ? Event.all : Event.guest
       end
     end
   end
