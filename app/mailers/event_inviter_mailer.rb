@@ -3,7 +3,7 @@ class EventInviterMailer < ApplicationMailer
 
   def event_invite(owner, event, email)
     @owner = owner
-    @event = event
+    @event = event.decorate
     @email = email
     mail(to: @email, subject: "#{@owner.name} has invited You to event #{@event.name}!")
   end
