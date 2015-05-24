@@ -55,5 +55,8 @@
             %td= "#{user.age}"
 
 - if user_signed_in?
-  = link_to 'Join this event!', event_participants_path(event.id), method: 'post', class: 'btn btn-success'
+  - if event.users.include? current_user
+    = link_to 'Unjoin event', event_participant_path(event.id, current_user.id), method: 'delete', class: 'btn btn-danger', data: { confirmation: "Are you sure?" }
+  - else
+    = link_to 'Join this event!', event_participants_path(event.id), method: 'post', class: 'btn btn-success'
 = link_to 'Back', events_path, class: 'btn btn-default'
