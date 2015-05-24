@@ -19,7 +19,8 @@ class CreateGameFromBoardgamesgeekApi
 
       unless hash["error"]
         game = BoardGame.new
-        game.name = hash[:name]
+        primary_name = dom.xpath("//boardgames/boardgame/name[@primary='true']")
+        game.name = primary_name.text
         game.description = hash[:description]
         game.min_players = hash[:minplayers]
         game.max_players = hash[:maxplayers]
